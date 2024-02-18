@@ -18,6 +18,7 @@
       ansible.builtin.apt:
         pkg:
           - git
-          - curl
           - python3
+    - name: Install docker using docker playbook
+      import_playbook: ./docker/setup.yaml.ansible
 
