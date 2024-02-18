@@ -1,0 +1,27 @@
+---
+- name: Setup and configure docker
+  hosts: NAS_SERVER
+
+  tasks:
+    - name: Ensure that following packages don't exist
+      ansible.builtin.package:
+        name: "{{ item }}"
+        state: absent
+        update_cache: yes
+      with_items:
+        - docker.io
+        - docker-compose
+        - docker-doc
+        - podman-docker
+    - name: Install the dependency packages
+      ansible.builtin.package:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+      with_items:
+        - ca-certificates
+        - curl 
+    - name: Add docker GPG key
+      ansible.builtin.shell:
+        command: install -m 0755 -d /etc/apt/keyrings
+

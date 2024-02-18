@@ -1,0 +1,23 @@
+---
+- name: Configure Raspberry pi NAS
+  hosts: NAS_SERVER
+  remote_user: root
+
+  tasks:
+    - name: Create non-root user groups
+      ansible.builtin.group:
+        name: nas_users
+        state: present
+    - name: Ensure that aquiles is a member of the nas_users group
+      ansible.builtin.user:
+        name: aquiles.gomez
+        shell: /bin/bash
+        groups:
+          - nas_users
+    - name: Ensure basic packages are installed
+      ansible.builtin.apt:
+        pkg:
+          - git
+          - curl
+          - python3
+

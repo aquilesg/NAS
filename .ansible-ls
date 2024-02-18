@@ -1,0 +1,8 @@
+---
+ansible:
+  playbook:
+    paths:
+      - ./setup
+  inventory:
+    paths:
+      - ./setup/inventory.ini
